@@ -21,7 +21,7 @@ function Header() {
     
     function handleOnChange(e) {
         e.preventDefault();
-        setPerson({...person, [e.target.name]: e.target.value})
+        setPerson({...person, [e.target.name]: e.target.value.toUpperCase()})
     }
 
     async function handleOnClick(e) {
@@ -33,7 +33,10 @@ function Header() {
                 text: 'Creado!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
-                })
+                }).then(function(){ 
+                    window.location.reload();
+                });
+            setLoading(false);
         } catch (error) {
             console.log(error)
         }

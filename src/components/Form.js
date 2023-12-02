@@ -29,6 +29,7 @@ function Form() {
             const lowerCase = e.target.value.toLowerCase();
             const uperCase = e.target.value.toUpperCase();
             const filterArray = autoComplete.filter((item) => item.name.includes(lowerCase) || item.name.includes(uperCase))
+            console.log(filterArray)
             setAutoCompleteFiltered(filterArray);
             setLoad(true);
             
@@ -68,9 +69,18 @@ function Form() {
     function handleCalculateEach(e) {
         e.preventDefault();
         const calculationEach = calculation(data);
+        console.log(calculationEach)
+        if (calculationEach.length > 0) {
         let head = Object.keys(calculationEach[0])
         setHeadersCalculation(head);
-        setCalculate(calculationEach);
+        setCalculate(calculationEach);     
+        } else {
+            Swal.fire({
+                text: 'Nada que calcular!',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar'
+                })
+        }
     }
 
     useEffect(() => {
@@ -81,14 +91,16 @@ function Form() {
                 querySnapshot.forEach((doc) => {
                     personArrays.push(doc.data());
                   });
+                console.log(personArrays)
                 setAutoComplete(personArrays);
-                console.log(autoComplete)
+                console.log('first')
             } catch (error) {
                 console.log(error)
             }
         }
         dbForAutoComplete();
     },[])
+    console.log(autoComplete)
 
     function handleSetOption(e) {
         e.preventDefault();
@@ -123,7 +135,7 @@ function Form() {
       {load &&
       <div className='autocompleteContainer'>
         <ul className='autocompleteList' onClick={(e) => handleSetOption(e)}>
-            {autoCompleteFiltered && autoCompleteFiltered.map((item, index) => (
+            {autoCompleteFiltered && autoCompleteFiltered.map((item) => (
                 <li className='autocompleteItemList' id={item.name} >{item.name}</li>
             ))}
         </ul>
