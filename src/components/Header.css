@@ -1,0 +1,32 @@
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.headerCreateContainer {
+    border-radius: 10px;
+    border: 1px solid rgb(230, 230, 230);
+    padding: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    top: 50px;
+    right: 20px;
+    background-color: white;
+    z-index: 2;
+}
+
+.headerCreateButtonContainer {
+    display: flex;
+    align-self: flex-end;
+
+
+
+}

@@ -1,0 +1,105 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.formInputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.formInputsIndividuals {
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+.formInputAutocomplete {
+    position: relative;
+}
+
+.input {
+    border-radius: 5px;
+    border: 1px solid rgb(207, 207, 207);
+}
+
+.input:hover {
+    border: 1px solid rgb(249, 163, 4)
+}
+
+.input:focus {
+    border: 1px solid rgb(221, 144, 2);
+    outline-offset: 0px;
+    outline: none;
+}
+
+.formButton {
+    border-radius: 10px;
+    background-color: rgb(249, 163, 4);
+    border: 0px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.formButton:hover {
+    background-color: rgb(221, 144, 2);
+}
+
+.formButton:active {
+    background-color: rgb(192, 126, 4);
+}
+
+.formSelectionContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.autocompleteContainer {
+    position: absolute;
+    top: 22px;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    width: 99%;
+    z-index: 2;
+    background-color: white;
+
+}
+
+.autocompleteList {
+    list-style-type: none;
+    margin: 0;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.autocompleteItemList {
+    cursor: pointer;
+}
+@media (max-width: 767px) {
+    .formInputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .formButtonsAlign {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+}
