@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import Form from './components/Form';
-import Selection from './components/Selection';
 import Header from './components/Header';
 
 
