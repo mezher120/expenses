@@ -16,8 +16,6 @@ export function calculation(data) {
 
     let l = 0;
     let r = data.length - 1;
-
-    let sum = 0;
     let result = []
     while (l < r) {
 

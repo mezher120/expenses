@@ -4,11 +4,11 @@ import './Selection.css'
 function Selection({ data, headers, type }) {
 
   return (
-    <div class="table-wrapper">
-      <table class="fl-table">
+    <div className="table-wrapper">
+      <table className="fl-table">
         <thead>
           <tr>
-            {!headers.name ? <div></div> : <th>#</th>}
+            {!headers.name ? <td></td> : <th>#</th>}
             {headers && headers.map((header) => (
               <th>{header}</th>
             ))}

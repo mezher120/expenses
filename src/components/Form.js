@@ -6,7 +6,6 @@ import Swal from 'sweetalert2'
 import './Form.css'
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase.js';
-import { Autocomplete, TextField } from '@mui/material';
 
 function Form() {
 

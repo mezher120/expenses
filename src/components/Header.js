@@ -27,7 +27,7 @@ function Header() {
     async function handleOnClick(e) {
         e.preventDefault();
         try {
-            const docRef = await addDoc(collection(db, 'persons'), person)
+            await addDoc(collection(db, 'persons'), person)
             Swal.fire({
                 text: 'Creado!',
                 icon: 'success',
