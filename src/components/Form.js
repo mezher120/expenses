@@ -20,7 +20,11 @@ function Form() {
 
     function handleOnChange(e) {
         if (e.target.name === 'price') {
-            setPerson({ ...person, [e.target.name]: parseFloat(e.target.value) })
+            if (e.target.value === 0) {
+                setPerson({ ...person, [e.target.name]: ""})
+            } else {
+                setPerson({ ...person, [e.target.name]: parseFloat(e.target.value) }) 
+            }
         } else {
             setPerson({ ...person, [e.target.name]: e.target.value })
         }
@@ -67,6 +71,7 @@ function Form() {
     function handleCalculateEach(e) {
         e.preventDefault();
         const calculationEach = calculation(data);
+
         if (calculationEach.length > 0) {
             let head = Object.keys(calculationEach[0])
             setHeadersCalculation(head);
