@@ -62,6 +62,19 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.formSelectionTotals {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-family: Tahoma;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 10px;
+    padding: 2px;
+    font-weight: 700px;
 }
 
 .autocompleteContainer {

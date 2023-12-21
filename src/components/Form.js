@@ -17,6 +17,7 @@ function Form() {
     const [autoComplete, setAutoComplete] = useState([]);
     const [autoCompleteFiltered, setAutoCompleteFiltered] = useState([]);
     const [load, setLoad] = useState(false);
+    const [sum, setSum] = useState("")
 
     function handleOnChange(e) {
         if (e.target.name === 'price') {
@@ -42,6 +43,7 @@ function Form() {
 
     function handleOnClick(e) {
         e.preventDefault();
+
         if (person.name) {
             setData([...data, person])
             let head = Object.keys(person)
@@ -51,7 +53,13 @@ function Form() {
                 price: "",
                 alias: "",
             })
-
+        let sumY = Number(person.price);
+        data.map(data => sumY = sumY + Number(data.price))
+        let avg = sumY / (data.length + 1);
+        setSum({
+            sum: sumY,
+            average: avg
+        })
         } else {
             Swal.fire({
                 text: 'Minimo agrega un nombre!',
@@ -164,7 +172,12 @@ function Form() {
                 </form>
             </div>
             <div className='formSelectionContainer'>
-                <Selection data={data} headers={headers} type='seleccion'></Selection>
+                <Selection data={data} headers={headers} type='seleccion' setData={setData} sum={sum} setSum={setSum}></Selection>
+                {sum ? <div className='formSelectionTotals'>
+                    <span>Total: {sum.sum}</span>
+                    <span>Cada Uno: {sum.average}</span>
+                </div>
+                : <div></div>}
             </div>
             <button className='formButton' onClick={(e) => handleCalculateEach(e)}>Calcular cada Uno</button>
             <Selection data={calculate} headers={headersCalculation} type='calculation'></Selection>

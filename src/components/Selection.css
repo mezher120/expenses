@@ -55,6 +55,17 @@
     background: #F8F8F8;
 }
 
+.selectionButton {
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(249, 163, 4);
+}
+
+.selectionButton:hover {
+    background-color: red;
+}
+
 /* Responsive */
 
 @media (max-width: 767px) {

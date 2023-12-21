@@ -1,7 +1,17 @@
 import React from 'react'
 import './Selection.css'
 
-function Selection({ data, headers, type }) {
+function Selection({ data, headers, type, setData, sum, setSum }) {
+
+  function handleDeleteSelection(e) {
+    e.preventDefault();
+    let newData = [...data]
+    let newSum = sum.sum - newData[e.target.id].price
+    let avg = newSum / (newData.length - 1)
+    setSum({sum: newSum, average: avg})
+    newData.splice(e.target.id, 1)
+    setData(newData);
+  }
 
   return (
     <div className="table-wrapper">
@@ -22,6 +32,7 @@ function Selection({ data, headers, type }) {
               <td>{item.name}</td>
               <td>{item.price}</td>
               <td>{item.alias}</td>
+              <td><button id={index} className='selectionButton' onClick={(e) => handleDeleteSelection(e)}>X</button></td>
             </tr>
           )) :
             data && data.map((item, index) => (
