@@ -30,7 +30,7 @@ function Party() {
             }
         }
         dbHistorial();
-    },[])
+    },[data])
 
     const handleOnShare = () => {
         html2canvas(screenShot.current).then(canvas => {

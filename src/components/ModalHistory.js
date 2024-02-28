@@ -18,7 +18,7 @@ function ModalHistory({data}) {
                    {data && data.map((party) => {
                     return (
                         <tr className='mhbody'>
-                        <Link className='linkbuttons'>
+                        <Link className='linkbuttons' to={`/${party.party}`}>
                         <td>{party.party}</td>
                         </Link>
                         <td>{party.date.slice(0,2)+"-"+party.date.slice(2,4)}</td>
