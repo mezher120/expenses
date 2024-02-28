@@ -1,21 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Header.css'
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import Swal from 'sweetalert2';
+import ModalHistory from './ModalHistory';
 
 function Header() {
 
     const [loading, setLoading] = useState(false)
+    const [loadingModal, setLoadingModal] = useState(false)
     const [person, setPerson] = useState({});
+    const [historial, setHistorial] = useState([]);
 
     function handleModal(e) {
         e.preventDefault();
-        setPerson({
-            name: "",
-            alias: ""
-        })
-        setLoading(!loading)
+      if (e.target.name === 'create') {
+          setPerson({
+              name: "",
+              alias: ""
+          })
+          setLoading(!loading)
+          setLoadingModal(false)
+      }
+      if (e.target.name === 'historial') {
+        setLoadingModal(!loadingModal)
+        setLoading(false)
+      }
+
     }
 
 
@@ -41,13 +52,31 @@ function Header() {
         }
     }
 
+    useEffect(() => {
+        const dbHistorial = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'historial'));
+                const historialArrays = [];
+                querySnapshot.forEach((doc) => {
+                    historialArrays.push(doc.data());
+                });
+                setHistorial(historialArrays);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        dbHistorial();
+    }, [])
+
 
     return (
         <div className='headerContainer'>
+            <div>
             <button className='formButton' onClick={() => window.location.reload()}>New</button>
+            <button className='formButton' name='historial' onClick={() => setLoadingModal(!loadingModal)}>Historial</button>
+            </div>
             <span>Gestor de Gastos</span>
-            <button className='formButton' onClick={(e) => handleModal(e)}>Create</button>
-
+            <button className='formButton' name='create' onClick={(e) => handleModal(e)}>Create</button>
             {loading &&
                 <div className='headerCreateContainer'>
                     <div className='formInputsIndividuals'>
@@ -63,6 +92,7 @@ function Header() {
                     </div>
                 </div>
             }
+            {loadingModal && <ModalHistory data={historial} />}
         </div>
     )
 }

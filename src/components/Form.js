@@ -4,7 +4,7 @@ import Selection from './Selection';
 import { calculation } from '../controllers/calculation.js'
 import Swal from 'sweetalert2'
 import './Form.css'
-import { collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
 function Form() {
@@ -18,6 +18,8 @@ function Form() {
     const [autoCompleteFiltered, setAutoCompleteFiltered] = useState([]);
     const [load, setLoad] = useState(false);
     const [sum, setSum] = useState("")
+    const [party, setParty] = useState("");
+    const [date, setDate] = useState("");
 
     function handleOnChange(e) {
         if (e.target.name === 'price') {
@@ -78,18 +80,27 @@ function Form() {
 
     function handleCalculateEach(e) {
         e.preventDefault();
-        const calculationEach = calculation(data);
-
-        if (calculationEach.length > 0) {
-            let head = Object.keys(calculationEach[0])
-            setHeadersCalculation(head);
-            setCalculate(calculationEach);
+        if (party && date) {
+            const calculationEach = calculation(data);
+    
+            if (calculationEach.length > 0) {
+                let head = Object.keys(calculationEach[0])
+                setHeadersCalculation(head);
+                setCalculate(calculationEach);
+            } else {
+                Swal.fire({
+                    text: 'Nada que calcular!',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+            }
+            
         } else {
             Swal.fire({
-                text: 'Nada que calcular!',
+                text: 'Falta Nombre del Party y/o Fecha',
                 icon: 'warning',
                 confirmButtonText: 'Aceptar'
-            })
+            })  
         }
     }
 
@@ -130,9 +141,49 @@ function Form() {
         setLoad(false)
     }
 
+    async function handleSaveData(e) {
+        e.preventDefault();
+        if (!party || !date) {
+            return;
+        }
+        
+        const newData = {
+            party: party,
+            calculate: calculate,
+            headers: headersCalculation, 
+            date: date.replace("-", "")
+        }
+        if (!newData.calculate.alias) {
+            newData.calculate.alias = null
+        }
+        console.log(newData)
+        try {
+            await addDoc(collection(db, 'historial'), newData)
+            Swal.fire({
+                text: 'Save it!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(function () {
+                window.location.reload();
+            });
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                text: "revisa la fecha DD-MM",
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            })
+        }
+    }
 
     return (
         <div className='formContainer'>
+            <div className='formTitleInputs'>
+                <label>Party</label>
+                <input id='party' name='party' className='input' type='text' value={party} onChange={(e) => setParty(e.target.value)}></input>
+                <label>Date</label>
+                <input id='date' name='date' className='input' type='text' value={date}  placeholder="DD-MM" onChange={(e) => setDate(e.target.value)}></input>
+            </div>
             <div>
 
                 <form>
@@ -181,6 +232,7 @@ function Form() {
             </div>
             <button className='formButton' onClick={(e) => handleCalculateEach(e)}>Calcular cada Uno</button>
             <Selection data={calculate} headers={headersCalculation} type='calculation'></Selection>
+            <button className='formButton' onClick={(e) => handleSaveData(e)}>Ok. Save data</button>
             {/* {calculate ? calculate.map((item) => {return (
         <div>
             <p>Deudor</p>

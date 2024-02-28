@@ -1,0 +1,26 @@
+.modalHistoryContainer {
+position: absolute;
+top: 6%;
+left: 2%;
+margin: 10px;
+border: 1px solid rgb(230, 230, 230);
+border-radius: 10px;
+padding: 10px;
+z-index: 2;
+background-color: white;
+}
+
+.mhwrapper {
+    margin: 0px !important;
+}
+
+.mhbody:hover {
+    cursor: pointer;
+    background-color: gray !important;
+}
+
+.linkbuttons {
+    font-display: none;
+    font-style: none;
+    color: black;
+}
