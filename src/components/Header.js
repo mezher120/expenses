@@ -72,7 +72,7 @@ function Header() {
     return (
         <div className='headerContainer'>
             <div>
-            <button className='formButton' onClick={() => window.location.reload()}>New</button>
+            <button className='formButton' onClick={() => window.location.href = '/'}>New</button>
             <button className='formButton' name='historial' onClick={() => setLoadingModal(!loadingModal)}>Historial</button>
             </div>
             <span>Gestor de Gastos</span>
