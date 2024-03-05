@@ -13,6 +13,12 @@
     margin-bottom: 10px;
 }
 
+.formTitlesMobile {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
 .formInputs {
     display: flex;
     flex-direction: row;
@@ -123,5 +129,15 @@
         flex-direction: row;
         justify-content: center;
         gap: 10px;
+    }
+
+    .formTitlesMobile {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .formTitleInputs {
+        margin-bottom: 30px;
     }
 }

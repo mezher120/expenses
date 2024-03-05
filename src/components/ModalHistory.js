@@ -15,9 +15,9 @@ function ModalHistory({data}) {
                 </tr>
                 </thead>
                 <tbody>
-                   {data && data.map((party) => {
+                   {data && data.map((party, index) => {
                     return (
-                        <tr className='mhbody'>
+                        <tr key={index} className='mhbody'>
                         <Link className='linkbuttons' to={`/${party.party}`}>
                         <td>{party.party}</td>
                         </Link>

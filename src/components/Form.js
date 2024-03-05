@@ -179,10 +179,14 @@ function Form() {
     return (
         <div className='formContainer'>
             <div className='formTitleInputs'>
+                <div className='formTitlesMobile'>
                 <label>Party</label>
                 <input id='party' name='party' className='input' type='text' value={party} onChange={(e) => setParty(e.target.value)}></input>
+                </div>
+                <div className='formTitlesMobile'>
                 <label>Date</label>
                 <input id='date' name='date' className='input' type='text' value={date}  placeholder="DD-MM" onChange={(e) => setDate(e.target.value)}></input>
+                </div>
             </div>
             <div>
 
